@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 
@@ -31,16 +33,14 @@ public class OrderRequest {
     @Schema(description = "Return date of the input Model", example = "2021-02-12")
     private Date returnDate;
 
+    @NotBlank
     @Schema(description = "days walked of the input Model", example = "3")
     private Integer daysWalked;
 
+    @NotBlank
     @Schema(description = "Cost per day of the input Model", example = "50")
-//    @Min(value = 50)
-//    @Max(value = 50)
     private Double costPerDay;
 
-//    @Schema(description = "Walk cost of the input Model", example = "100")
-//    private Double walkCost;
 
     @Schema(description = "Checking if the input Model was walked", example = "true")
     private Boolean dogWalked;

@@ -38,6 +38,4 @@ public class WalkerResponse {
 
     private Boolean isAvailable;
 
-//    private User user;
-
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import main.repository.entities.UserRole;
 import org.springframework.stereotype.Component;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
@@ -21,7 +22,8 @@ public class UserRequest {
 
     private int id ;
 
-     @Schema(description = "Name of the input Model", example = "Mark Enderson", required = true)
+    @NotBlank
+    @Schema(description = "Name of the input Model", example = "Mark Enderson", required = true)
     private String name;
 
     @NotNull
@@ -29,6 +31,7 @@ public class UserRequest {
     @Schema(description = "Age of the input Model", example = "31", required = true)
     private Integer age;
 
+    @NotBlank
     @Schema(description = "Password of the input Model", example = "31AKIJ!@3s!")
     private String password;
 
@@ -38,6 +41,7 @@ public class UserRequest {
     @Schema(description = "Phone number of the input Model", example = "(865) 2408023", required = true)
     private String phoneNumber;
 
+    @NotBlank
     @Schema(description = "Address of the input Model", example = "(865) 2408023")
     private String address;
 
@@ -53,13 +57,5 @@ public class UserRequest {
     @Schema(description = "Checking the input Model user role", example = "(865) 2408023")
     private UserRole userRole;
 
-//    @Schema(description = "Checking the input Model dogs", example = "dog")
-//    private List<Dog> dogs;
-//
-//    @Schema(description = "Checking the input Model walker", example = "walker")
-//    private Walker walker;
-//
-//    @Schema(description = "Checking the input Model order", example = "order")
-//    private Order order;
 
 }
