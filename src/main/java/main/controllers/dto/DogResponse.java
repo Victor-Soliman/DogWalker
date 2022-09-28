@@ -30,11 +30,11 @@ public class DogResponse {
     private Boolean hasMicrochip;
 
     private String chipNumber;
-
-    private User user;
-
-    private Walker walker;
-
-    private Order order;
+//
+//    private User user;
+//
+//    private Walker walker;
+//
+//    private Order order;
 
 }

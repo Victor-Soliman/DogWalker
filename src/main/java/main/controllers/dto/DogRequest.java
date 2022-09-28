@@ -24,6 +24,8 @@ import javax.validation.constraints.Size;
 @Builder
 public class DogRequest {
 
+    private Integer id ;
+
 
     @NotBlank
     @Schema(description = "Name of the input Model", example = "Mark Anthony", required = true)
@@ -42,10 +44,5 @@ public class DogRequest {
     @Schema(description = "ChipNumber of the input Model", example = "49-851-4989")
     private String chipNumber;
 
-    private User user;
-
-    private Walker walker;
-
-    private Order order;
 
 }

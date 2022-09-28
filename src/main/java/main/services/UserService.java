@@ -8,9 +8,10 @@ import main.mappers.UserRequestMapper;
 import main.mappers.UserResponseMapper;
 import main.repository.UserRepository;
 import main.repository.entities.User;
+import main.repository.entities.UserRole;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,7 +75,7 @@ public class UserService {
     }
 
 
-    public void delete(Integer id) throws UnsupportedOperationException {
+    public void delete(Integer id) {
 
         Optional<User> searchedUserById = userRepository.findById(id);
 
@@ -84,10 +85,10 @@ public class UserService {
             userRepository.deleteById(id);
             log.info("User with id : " + id + " was Successfully deleted..");
 
-        } else
+        } else {
             log.error("User was not found in the database with id : " + id);
-        throw new UnsupportedOperationException(" * User was not found in the database with id : " + id);
-
+            throw new NotFoundException(" * User was not found in the database with id : " + id);
+        }
     }
 
     public UserResponse update(Integer id, UserRequest userRequest) {
@@ -99,79 +100,90 @@ public class UserService {
             log.info("User was found in the database");
 
             User userToBeUpdated = userFromDataBase.get();
-            userToBeUpdated.setName(userRequest.getName());
-            userToBeUpdated.setAge(userRequest.getAge());
-            userToBeUpdated.setPassword(userRequest.getPassword());
-            userToBeUpdated.setCity(userRequest.getCity());
-            userToBeUpdated.setPhoneNumber(userRequest.getPhoneNumber());
-            userToBeUpdated.setAddress(userRequest.getAddress());
-            userToBeUpdated.setEmail(userRequest.getEmail());
-            userToBeUpdated.setHasDog(userRequest.getHasDog());
-            userToBeUpdated.setUserBlocked(userRequest.isUserBlocked());
-            userToBeUpdated.setUserRole(userRequest.getUserRole());
-            userToBeUpdated.setDogs(userRequest.getDogs());
-//            userToBeUpdated.setWalker(userRequest.getWalker());
-//            userToBeUpdated.setOrder(userRequest.getOrder());
+
+            setAllParameters(userRequest, userToBeUpdated);
 
             User savedUser = userRepository.save(userToBeUpdated);
+
             log.info("Successful Update! .. User was mapped to the database");
+
             return mapper.map(savedUser);
+
         } else
+
             log.error("User was not found in the database with id : " + id);
         throw new UnsupportedOperationException(" * User was not found in the database with id : " + id);
+
     }
 
-//        @Transactional
-    public UserResponse updatePassword(Integer id, String password) {
+
+    public UserResponse updateUserPartially(UserResponse request) {
+
+        Integer id = request.getId();
+
         User userFromDataBase = userRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException(" * User was not found in the database with id : " + id));
 
-        userFromDataBase.setPassword(password);
+        setParametersPartially(request, userFromDataBase);
 
         User saved = userRepository.save(userFromDataBase);
 
         return mapper.map(saved);
     }
 
-    public UserResponse updatePhoneNumber(Integer id, String phoneNumber) {
 
-        User userToBeUpdated = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException(" * User was not found in the database with id : " + id));
+    public List<UserResponse> findBlockedUsers() {
 
-        userToBeUpdated.setPhoneNumber(phoneNumber);
-        User saved = userRepository.save(userToBeUpdated);
+        List<User> allUsers = userRepository.findAll();
 
-        return mapper.map(saved);
+        List<User> blockedUsers = allUsers.stream()
+                .filter(User::getUserBlocked).toList();
+
+        return blockedUsers.stream()
+                .map(mapper::map)
+                .collect(Collectors.toList());
+
     }
 
-    public UserResponse updateAddress(Integer id, String address) {
-
-        User userToBeUpdated = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException(" * User was not found in the database with id : " + id));
-
-        userToBeUpdated.setAddress(address);
-        User user = userRepository.save(userToBeUpdated);
-
-        return mapper.map(user);
+    private void setAllParameters(UserRequest userRequest, User userToBeUpdated) {
+        userToBeUpdated.setName(userRequest.getName());
+        userToBeUpdated.setAge(userRequest.getAge());
+        userToBeUpdated.setPassword(userRequest.getPassword());
+        userToBeUpdated.setCity(userRequest.getCity());
+        userToBeUpdated.setPhoneNumber(userRequest.getPhoneNumber());
+        userToBeUpdated.setAddress(userRequest.getAddress());
+        userToBeUpdated.setEmail(userRequest.getEmail());
+        userToBeUpdated.setHasDog(userRequest.getHasDog());
+        userToBeUpdated.setUserBlocked(userRequest.isUserBlocked());
+        userToBeUpdated.setUserRole(userRequest.getUserRole());
     }
 
-    public UserResponse updateEmail(Integer id, String email) {
-        User userToBeUpdated = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException(" * User was not found in the database with id :  " + id));
+    private void setParametersPartially(UserResponse request, User userFromDataBase) {
+        userFromDataBase.setName(request.getName() == null ? userFromDataBase.getName() : request.getName());
 
-        userToBeUpdated.setEmail(email);
-        User user = userRepository.save(userToBeUpdated);
+        userFromDataBase.setAge(request.getAge() == null ? userFromDataBase.getAge() : request.getAge());
 
-        return mapper.map(user);
+        userFromDataBase.setPassword(request.getPassword() == null ?
+                userFromDataBase.getPassword() : request.getPassword());
+
+        userFromDataBase.setCity(request.getCity() == null ? userFromDataBase.getCity() : request.getCity());
+
+        userFromDataBase.setPhoneNumber(request.getPhoneNumber() == null ?
+                userFromDataBase.getPhoneNumber() : request.getPhoneNumber());
+
+        userFromDataBase.setAddress(request.getAddress() == null ?
+                userFromDataBase.getAddress() : request.getAddress());
+
+        userFromDataBase.setEmail(request.getEmail() == null ? userFromDataBase.getEmail() : request.getEmail());
+
+        // If I don't give a parameter in the JSON ,that means == null -> do something , else -> do another thing
+        userFromDataBase.setHasDog(request.getHasDog() == null ? userFromDataBase.getHasDog() : request.getHasDog());
+
+        userFromDataBase.setUserBlocked(request.getUserBlocked() == null ?
+                userFromDataBase.getUserBlocked() : request.getUserBlocked());
+
+        userFromDataBase.setUserRole(UserRole.valueOf(request.getUserRole() == null ?
+                String.valueOf(userFromDataBase.getUserRole()) : String.valueOf(request.getUserRole())));
     }
 
-    public UserResponse updateUserStatus(Integer id, String blocked) {
-        User userToBeUpdated = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException(" * User was not found in the database with id : " + id));
-
-        userToBeUpdated.setUserBlocked(Boolean.parseBoolean(blocked));
-        User user = userRepository.save(userToBeUpdated);
-
-        return mapper.map(user);
-    }
 }

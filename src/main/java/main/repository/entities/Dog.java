@@ -36,7 +36,6 @@ public class Dog {
     @Column(name = "genealogy", nullable = false)
     private String genealogy;
 
-
     @Column(name = "has_microchip", nullable = false)
     private Boolean hasMicrochip;
 
@@ -44,21 +43,13 @@ public class Dog {
     private String chipNumber;
 
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    @JoinColumn(name = "walker_id")
-    private Walker walker;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "walker_id")
+//    private Walker walker;
 
 //    @OneToOne(mappedBy = "order_id")
 //    private Order order;

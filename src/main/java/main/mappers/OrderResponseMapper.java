@@ -12,11 +12,13 @@ public class OrderResponseMapper {
                 .id(order.getId())
                 .orderDate(order.getOrderDate())
                 .returnDate(order.getReturnDate())
-                .walk_cost(order.getWalk_cost())
+                .daysWalked(order.getDaysWalked())
+                .costPerDay(order.getCostPerDay())
+                .walkCost(order.getWalkCost())
                 .dogWalked(order.getDogWalked())
-//                .user(order.getUser())
-//                .walker(order.getWalker())
-//                .dog(order.getDog())
+                .user(order.getUser())
+                .walker(order.getWalker())
+                .dog(order.getDog())
                 .build();
     }
 }

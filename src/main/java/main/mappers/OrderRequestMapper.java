@@ -13,11 +13,13 @@ public class OrderRequestMapper {
         return Order.builder()
                 .orderDate((Date) orderRequest.getOrderDate())
                 .returnDate((Date) orderRequest.getReturnDate())
-                .walk_cost(orderRequest.getWalk_cost())
+                .daysWalked(orderRequest.getDaysWalked())
+                .costPerDay(orderRequest.getCostPerDay())
+//                .walkCost(orderRequest.getWalkCost())
                 .dogWalked(orderRequest.getDogWalked())
-//                .walker(orderRequest.getWalker())
-//                .user(orderRequest.getUser())
-//                .dog(orderRequest.getDog())
+                .walker(orderRequest.getWalker())
+                .user(orderRequest.getUser())
+                .dog(orderRequest.getDog())
                 .build();
     }
 }

@@ -63,18 +63,11 @@ public class Walker {
 //    @JoinColumn(name = "user_id")
 //    private User user;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "walker",
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    private List<Dog> dogs;
-
-    @OneToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "order_id")
-    private Order order;
+//    @OneToMany(fetch = FetchType.LAZY,
+//            mappedBy = "walker")
+//    private List<Dog> dogs;
+//
+//    @OneToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
 }

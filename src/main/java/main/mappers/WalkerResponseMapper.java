@@ -20,7 +20,6 @@ public class WalkerResponseMapper {
                 .email(walker.getEmail())
                 .yearsOfExperience(walker.getYearsOfExperience())
                 .isAvailable(walker.getIsAvailable())
-//                .user(walker.getUser())
                 .build();
     }
 }

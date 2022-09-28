@@ -39,17 +39,11 @@ public class UserResponse {
 
     private String email;
 
-    private boolean hasDog;
+    private Boolean hasDog;
 
-    private boolean userBlocked;
+    private Boolean userBlocked;
 
     private UserRole userRole;
-
-    private List<Dog> dogs;
-
-    private Walker walker;
-
-    private Order order;
 
 
 }

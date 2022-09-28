@@ -19,7 +19,7 @@ public class UserRequestMapper {
                 .hasDog(userRequest.getHasDog())
                 .userBlocked(userRequest.isUserBlocked())
                 .userRole(userRequest.getUserRole())
-                .dogs(userRequest.getDogs())
+//                .dogs(userRequest.getDogs())
 //                .walker(userRequest.getWalker())
 //                .order(userRequest.getOrder())
                 .build();

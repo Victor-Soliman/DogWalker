@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -30,55 +31,50 @@ public class User {
     private String name;
 
     @Min(15)
+    @NotNull
     @Column(name = "age")
     private Integer age;
 
     @Column(name = "password", nullable = false, unique = true)
+    @NotNull
     private String password;
 
     @Column(name = "city")
+    @NotNull
     private String city;
 
-    @NotBlank
+    @NotNull
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
     @Column(name = "address")
+    @NotNull
     private String address;
 
     @Column(name = "email", nullable = false, unique = true)
+    @NotNull
     private String email;
 
     @Column(name = "has_dog")
-    private boolean hasDog;
+    private Boolean hasDog;
 
     @Column(name = "user_blocked")
-    private boolean userBlocked;
+    private Boolean userBlocked;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
 
-    @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "user",
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    private List<Dog> dogs;
+//    @OneToMany(fetch = FetchType.LAZY,
+//            mappedBy = "user")
+//    private List<Dog> dogs;
 
-    @OneToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "walker_id")
-    private Walker walker;
-
-    @OneToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "order_id")
-    private Order order;
+//    @OneToOne
+//    @JoinColumn(name = "walker_id")
+//    private Walker walker;
+//
+//    @OneToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
 }

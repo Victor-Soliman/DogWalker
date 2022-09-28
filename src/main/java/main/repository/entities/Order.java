@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 
 
@@ -29,30 +30,29 @@ public class Order {
     @Column(name = "return_date")
     private Date returnDate;
 
+    @Column(name = "days_walked")
+    private Integer daysWalked;
+
+    @Column(name = "cost_per_day")
+//    @Min(value = 50)
+//    @Max(value = 50)
+    private Double costPerDay;
+
     @Column(name = "walk_cost")
-    private Double walk_cost;
+    private Double walkCost;
 
     @Column(name = "dog_walked")
     private Boolean dogWalked;
 
-//    @OneToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-////            CascadeType.PERSIST,
-//            CascadeType.REFRESH})
-//    @JoinColumn(name = "walker_id")
-//    private Walker walker;
-//
-//    @OneToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-////            CascadeType.PERSIST,
-//            CascadeType.REFRESH})
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//
-//    @OneToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-////            CascadeType.PERSIST,
-//            CascadeType.REFRESH})
-//    @JoinColumn(name = "dog_id")
-//    private Dog dog;
+    @OneToOne
+    @JoinColumn(name = "walker_id")
+    private Walker walker;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "dog_id")
+    private Dog dog;
 }

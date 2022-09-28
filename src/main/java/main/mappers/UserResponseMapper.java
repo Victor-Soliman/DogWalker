@@ -2,7 +2,6 @@ package main.mappers;
 
 import main.controllers.dto.UserResponse;
 import main.repository.entities.User;
-import main.repository.entities.UserRole;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,12 +17,9 @@ public class UserResponseMapper {
                 .phoneNumber(user.getPhoneNumber())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .hasDog(user.isHasDog())
-                .userBlocked(user.isUserBlocked())
+                .hasDog(user.getHasDog())
+                .userBlocked(user.getUserBlocked())
                 .userRole(user.getUserRole())
-                .dogs(user.getDogs())
-//                .walker(user.getWalker())
-//                .order(user.getOrder())
                 .build();
     }
 }

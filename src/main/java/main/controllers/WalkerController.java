@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import main.controllers.dto.UserResponse;
 import main.controllers.dto.WalkerRequest;
 import main.controllers.dto.WalkerResponse;
 import main.services.WalkerService;
@@ -23,10 +22,10 @@ public class WalkerController {
 
     private final WalkerService walkerService;
 
-    @Operation(summary = "GET request documentation", description = "full documentation of this GET request")
+    @Operation(description = "GET request to find  all walkers ")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "all good on POST"),
-            @ApiResponse(responseCode = "400", description = "Bad boy GET request")
+            @ApiResponse(responseCode = "200", description = "All good on GET"),
+            @ApiResponse(responseCode = "400", description = "Bad GET request")
     }
     )
     @GetMapping()
@@ -34,10 +33,10 @@ public class WalkerController {
         return walkerService.findAll();
     }
 
-    @Operation(summary = "GET request documentation", description = "full documentation of this GET request")
+    @Operation(description = "GET request to find a walker based on his id passed in the URL")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "all good on POST"),
-            @ApiResponse(responseCode = "400", description = "Bad boy GET request")
+            @ApiResponse(responseCode = "200", description = "All good on GET"),
+            @ApiResponse(responseCode = "400", description = "Bad GET request")
     }
     )
     @GetMapping("{id}")
@@ -45,7 +44,8 @@ public class WalkerController {
         return walkerService.findById(id);
     }
 
-    @Operation(summary = "GET request documentation", description = "full documentation of this GET request")
+    @Operation(description = "GET request to find walkers based on there name" +
+                    " passed in the URL as a request parameter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "all good on GET"),
             @ApiResponse(responseCode = "400", description = "Bad boy GET request")
@@ -56,7 +56,7 @@ public class WalkerController {
         return walkerService.findByName(name);
     }
 
-    @Operation(summary = "POST request documentation", description = "full documentation of this POST request")
+    @Operation(description = "Post request to (Create) a walker in the database")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "all good on POST"),
             @ApiResponse(responseCode = "400", description = "Bad boy POST request")
@@ -64,11 +64,12 @@ public class WalkerController {
     )
     @PostMapping
     public WalkerResponse save(@Parameter(description = "Documented Model used as input for POST")
-                                   @Valid @RequestBody WalkerRequest walkerRequest) {
+                               @Valid @RequestBody WalkerRequest walkerRequest) {
         return walkerService.save(walkerRequest);
     }
 
-    @Operation(summary = "PUT request documentation", description = "full documentation of this PUT request")
+    @Operation(description = "PUT request to (Total Update) a walker in the database based on id passed on URL ," +
+            " and a request in body")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "all good on PUT"),
             @ApiResponse(responseCode = "400", description = "Bad boy PUT request")
@@ -79,56 +80,19 @@ public class WalkerController {
         return walkerService.update(id, walkerRequest);
     }
 
-    @Operation(summary = "Patch request documentation", description = "full documentation of this Patch request")
+    @Operation(description = "PATCH request to(Partial update) a dog in the database (Recommended more than 3 parameters) ," +
+          "we send data in JSON to the server")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "all good on Patch"),
             @ApiResponse(responseCode = "400", description = "Bad boy Patch request")
     }
     )
-    @PatchMapping("/update/{id}/password/{password}")
-    public WalkerResponse updatePassword(@PathVariable(value = "id") Integer id,
-                                         @PathVariable(value = "password") String password) {
-        return walkerService.updatePassword(id, password);
+    @PatchMapping("/update")
+    public WalkerResponse updateWalkerPartially(@RequestBody WalkerRequest request){
+        return walkerService.updateWalkerPartially(request);
     }
 
-    @Operation(summary = "Patch request documentation", description = "full documentation of this Patch request")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "all good on Patch"),
-            @ApiResponse(responseCode = "400", description = "Bad boy Patch request")
-    }
-    )
-    @PatchMapping("/update/{id}/phone/{phone_number}")
-    public WalkerResponse updatePhoneNumber(@PathVariable(value = "id") Integer id,
-                                            @PathVariable(value = "phone_number") String phoneNumber) {
-        return walkerService.updatePhoneNumber(id, phoneNumber);
-    }
-
-
-    @Operation(summary = "Patch request documentation", description = "full documentation of this Patch request")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "all good on Patch"),
-            @ApiResponse(responseCode = "400", description = "Bad boy Patch request")
-    }
-    )
-    @PatchMapping("/update/{id}/address/{address}")
-    public WalkerResponse updateAddress(@PathVariable(value = "id") Integer id,
-                                        @PathVariable(value = "address") String address) {
-        return walkerService.updateAddress(id, address);
-    }
-
-    @Operation(summary = "Patch request documentation", description = "full documentation of this Patch request")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "all good on Patch"),
-            @ApiResponse(responseCode = "400", description = "Bad boy Patch request")
-    }
-    )
-    @PatchMapping("/update/{id}/email/{email}")
-    public WalkerResponse updateEmail(@PathVariable(value = "id") Integer id,
-                                      @PathVariable(value = "email") String email) {
-        return walkerService.updateEmail(id, email);
-    }
-
-    @Operation(summary = "DELETE request documentation", description = "full documentation of this DELETE request")
+    @Operation(description = "DELETE request to delete a dog in the database based on id passed on URL")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "all good on DELETE"),
             @ApiResponse(responseCode = "400", description = "Bad boy DELETE request")
@@ -139,5 +103,27 @@ public class WalkerController {
         walkerService.delete(id);
     }
 
+    @Operation(description = "GET request to find available walkers ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All good on GET"),
+            @ApiResponse(responseCode = "400", description = "Bad GET request")
+    }
+    )
+    @GetMapping("/available")
+    public List<WalkerResponse> findAvailableWalkers() {
 
+        return walkerService.checkWalkerAvailability();
+
+    }
+
+    @Operation(description = "GET request to find walkers based on there years of experience passed in the URL")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All good on GET"),
+            @ApiResponse(responseCode = "400", description = "Bad GET request")
+    }
+    )
+    @GetMapping("/years_of_experience")
+    public List<WalkerResponse> findTopWalkersByYearsOfExperience(@RequestParam(name = "years") Integer years){
+       return walkerService.findTopWalkersByYearsOfExperienceGreaterThan(years);
+    }
 }

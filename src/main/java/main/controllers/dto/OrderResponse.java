@@ -27,14 +27,18 @@ public class OrderResponse {
 
     private Date returnDate;
 
-    private Double walk_cost;
+    private Integer daysWalked;
+
+    private Double costPerDay;
+
+    private Double walkCost;
 
     private Boolean dogWalked;
 
-//    private Walker walker;
-//
-//    private User user;
-//
-//    private Dog dog;
+    private Walker walker;
+
+    private User user;
+
+    private Dog dog;
 
 }

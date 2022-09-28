@@ -15,7 +15,15 @@ public interface OrdersRepository extends JpaRepository<Order, Integer> {
     @Override
     Optional<Order> findById(Integer integer);
 
-    List<Order> findByOrderDate(Date orderDate);
+    List<Order> findOrdersByOrderDate(Date orderDate);
 
-    List<Order> findByReturnDate(Date returnDate);
+    List<Order> findOrdersByReturnDate(Date returnDate);
+
+    List<Order> findAllByOrderDateAfter(Date orderDate);
+
+    List<Order> findAllByOrderDateBefore(Date orderDate);
+
+    List<Order> findByDaysWalkedIsGreaterThan(Integer number);
+
+
 }

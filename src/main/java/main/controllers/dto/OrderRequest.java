@@ -11,6 +11,8 @@ import main.repository.entities.Walker;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 
 
@@ -21,25 +23,34 @@ import java.sql.Date;
 @Builder
 public class OrderRequest {
 
+    private Integer id;
+
     @Schema(description = "Order date of the input Model", example = "2021-02-12")
     private Date orderDate;
 
     @Schema(description = "Return date of the input Model", example = "2021-02-12")
     private Date returnDate;
 
-    @Schema(description = "Walk cost of the input Model", example = "10.45")
-    private Double walk_cost;
+    @Schema(description = "days walked of the input Model", example = "3")
+    private Integer daysWalked;
+
+    @Schema(description = "Cost per day of the input Model", example = "50")
+//    @Min(value = 50)
+//    @Max(value = 50)
+    private Double costPerDay;
+
+//    @Schema(description = "Walk cost of the input Model", example = "100")
+//    private Double walkCost;
 
     @Schema(description = "Checking if the input Model was walked", example = "true")
     private Boolean dogWalked;
 
-//
-//    @Schema(description = "Walker input Model", example = "Marc Jhon")
-//    private Walker walker;
-//
-//    @Schema(description = "User input Model", example = "Sam Anthony")
-//    private User user;
-//
-//    @Schema(description = " Dog input Model", example = "Tikva")
-//    private Dog dog;
+    @Schema(description = "Walker input Model", example = "Marc Jhon")
+    private Walker walker;
+
+    @Schema(description = "User input Model", example = "Sam Anthony")
+    private User user;
+
+    @Schema(description = " Dog input Model", example = "Tikva")
+    private Dog dog;
 }

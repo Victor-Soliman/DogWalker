@@ -21,6 +21,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class WalkerRequest {
 
+    private Integer id;
+
+
     @NotBlank
     @Schema(description = "Name of the input Model", example = "John Martin", required = true)
     private String name;
@@ -52,7 +55,5 @@ public class WalkerRequest {
 
     @Schema(description = "Checking if the input Model is available", example = "true")
     private Boolean isAvailable;
-
-    private User user;
 
 }

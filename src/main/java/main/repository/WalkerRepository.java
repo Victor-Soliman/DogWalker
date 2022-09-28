@@ -14,4 +14,6 @@ public interface WalkerRepository extends JpaRepository<Walker, Integer> {
     Optional<Walker> findById(Integer integer);
 
     List<Walker> findByName(String name);
+
+    List<Walker> findByYearsOfExperienceGreaterThan(Integer yearsOfExperience);
 }

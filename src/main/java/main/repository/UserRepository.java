@@ -1,6 +1,7 @@
 package main.repository;
 
 import main.repository.entities.User;
+import main.repository.entities.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findById(Integer integer);
 
     List<User> findByName(String name);
+
 
 }
