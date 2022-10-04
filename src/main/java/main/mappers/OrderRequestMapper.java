@@ -1,6 +1,6 @@
 package main.mappers;
 
-import main.controllers.dto.OrderRequest;
+import main.dto.OrderRequest;
 import main.repository.entities.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,6 @@ public class OrderRequestMapper {
                 .returnDate((Date) orderRequest.getReturnDate())
                 .daysWalked(orderRequest.getDaysWalked())
                 .costPerDay(orderRequest.getCostPerDay())
-//                .walkCost(orderRequest.getWalkCost())
                 .dogWalked(orderRequest.getDogWalked())
                 .walker(orderRequest.getWalker())
                 .user(orderRequest.getUser())

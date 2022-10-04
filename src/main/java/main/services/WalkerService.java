@@ -2,8 +2,8 @@ package main.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import main.controllers.dto.WalkerRequest;
-import main.controllers.dto.WalkerResponse;
+import main.dto.WalkerRequest;
+import main.dto.WalkerResponse;
 import main.mappers.WalkerRequestMapper;
 import main.mappers.WalkerResponseMapper;
 import main.repository.WalkerRepository;

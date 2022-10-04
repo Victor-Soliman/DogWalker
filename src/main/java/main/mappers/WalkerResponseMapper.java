@@ -1,6 +1,6 @@
 package main.mappers;
 
-import main.controllers.dto.WalkerResponse;
+import main.dto.WalkerResponse;
 import main.repository.entities.Walker;
 import org.springframework.stereotype.Component;
 

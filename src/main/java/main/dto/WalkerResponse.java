@@ -1,27 +1,22 @@
-package main.controllers.dto;
+package main.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import main.repository.entities.Dog;
-import main.repository.entities.Order;
-import main.repository.entities.UserRole;
-import main.repository.entities.Walker;
+import main.repository.entities.User;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.List;
 
 @Component
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Builder
-
-public class UserResponse {
+public class WalkerResponse {
 
     private Integer id;
 
@@ -39,11 +34,8 @@ public class UserResponse {
 
     private String email;
 
-    private Boolean hasDog;
+    private Integer yearsOfExperience;
 
-    private Boolean userBlocked;
-
-    private UserRole userRole;
-
+    private Boolean isAvailable;
 
 }

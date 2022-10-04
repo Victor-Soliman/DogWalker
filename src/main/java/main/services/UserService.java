@@ -1,16 +1,14 @@
 package main.services;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import main.controllers.dto.UserRequest;
-import main.controllers.dto.UserResponse;
+import main.dto.UserRequest;
+import main.dto.UserResponse;
 import main.mappers.UserRequestMapper;
 import main.mappers.UserResponseMapper;
 import main.repository.UserRepository;
 import main.repository.entities.User;
 import main.repository.entities.UserRole;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 

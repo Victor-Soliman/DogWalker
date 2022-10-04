@@ -1,6 +1,6 @@
 package main.mappers;
 
-import main.controllers.dto.UserRequest;
+import main.dto.UserRequest;
 import main.repository.entities.User;
 import org.springframework.stereotype.Component;
 

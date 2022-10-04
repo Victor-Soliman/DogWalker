@@ -1,4 +1,4 @@
-package main.controllers.dto;
+package main.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

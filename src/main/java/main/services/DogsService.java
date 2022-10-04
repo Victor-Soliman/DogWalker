@@ -2,9 +2,8 @@ package main.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import main.controllers.dto.DogRequest;
-import main.controllers.dto.DogResponse;
-import main.controllers.dto.UserResponse;
+import main.dto.DogRequest;
+import main.dto.DogResponse;
 import main.mappers.DogRequestMapper;
 import main.mappers.DogResponseMapper;
 import main.repository.DogsRepository;

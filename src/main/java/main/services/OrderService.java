@@ -2,8 +2,8 @@ package main.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import main.controllers.dto.OrderRequest;
-import main.controllers.dto.OrderResponse;
+import main.dto.OrderRequest;
+import main.dto.OrderResponse;
 import main.mappers.OrderRequestMapper;
 import main.mappers.OrderResponseMapper;
 import main.repository.OrdersRepository;
