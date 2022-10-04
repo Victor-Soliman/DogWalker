@@ -5,9 +5,12 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import main.controllers.dto.WalkerRequest;
 import main.controllers.dto.WalkerResponse;
 import main.services.WalkerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +21,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("walkers")
 @Validated
+@Slf4j
 public class WalkerController {
 
     private final WalkerService walkerService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(description = "GET request to find  all walkers ")
     @ApiResponses(value = {
@@ -65,6 +71,7 @@ public class WalkerController {
     @PostMapping
     public WalkerResponse save(@Parameter(description = "Documented Model used as input for POST")
                                @Valid @RequestBody WalkerRequest walkerRequest) {
+        walkerRequest.setPassword(passwordEncoder.encode(walkerRequest.getPassword()));
         return walkerService.save(walkerRequest);
     }
 
@@ -125,5 +132,12 @@ public class WalkerController {
     @GetMapping("/years_of_experience")
     public List<WalkerResponse> findTopWalkersByYearsOfExperience(@RequestParam(name = "years") Integer years){
        return walkerService.findTopWalkersByYearsOfExperienceGreaterThan(years);
+    }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleExceptions(IllegalArgumentException exception){
+        log.error(exception.getMessage(),exception);
+        return exception.getMessage();
     }
 }

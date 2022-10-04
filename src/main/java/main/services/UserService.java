@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import main.controllers.dto.UserRequest;
@@ -9,6 +10,7 @@ import main.mappers.UserResponseMapper;
 import main.repository.UserRepository;
 import main.repository.entities.User;
 import main.repository.entities.UserRole;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+
 public class UserService {
 
     private final UserRepository userRepository;
@@ -26,6 +29,7 @@ public class UserService {
     private final UserResponseMapper mapper;
 
     private final UserRequestMapper requestMapper;
+
 
     public List<UserResponse> findAll() {
         return userRepository.findAll().stream()

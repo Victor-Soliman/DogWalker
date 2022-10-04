@@ -1,12 +1,17 @@
 package main.controllers;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import main.controllers.dto.UserRequest;
 import main.controllers.dto.UserResponse;
 import main.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -16,9 +21,11 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 @Validated
+@Slf4j
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(description = "GET request for all users in the DB")
     @ApiResponses(value = {
@@ -64,7 +71,11 @@ public class UserController {
     )
     @PostMapping
     public UserResponse save(@Valid @RequestBody UserRequest userRequest) {
-
+//        if(errors.hasErrors()){
+//            log.info("Error processing userRequest: "+ userRequest);
+//            throw new RuntimeException("Wrong user details");
+//        }
+        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         return userService.save(userRequest);
     }
 
@@ -117,6 +128,13 @@ public class UserController {
     public List<UserResponse> findBlockedUsers(){
 
         return userService.findBlockedUsers();
+    }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleExceptions(IllegalArgumentException exception){
+        log.error(exception.getMessage(),exception);
+        return exception.getMessage();
     }
 
 }
