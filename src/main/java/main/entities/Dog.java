@@ -1,4 +1,4 @@
-package main.repository.entities;
+package main.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

@@ -7,8 +7,8 @@ import main.dto.UserResponse;
 import main.mappers.UserRequestMapper;
 import main.mappers.UserResponseMapper;
 import main.repository.UserRepository;
-import main.repository.entities.User;
-import main.repository.entities.UserRole;
+import main.entities.User;
+import main.entities.UserRole;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 

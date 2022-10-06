@@ -1,17 +1,16 @@
-package main.repository.entities;
+package main.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -19,8 +18,8 @@ import java.util.List;
 @Builder
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "walkers")
+public class Walker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,49 +29,43 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Min(15)
     @NotNull
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "password", nullable = false, unique = true)
-    @NotNull
+    @Column(name = "password")
     private String password;
 
     @Column(name = "city")
-    @NotNull
     private String city;
 
-    @NotNull
-    @Column(name = "phone_number", unique = true)
+    @NotBlank
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "address")
-    @NotNull
     private String address;
 
-    @Column(name = "email", nullable = false, unique = true)
-    @NotNull
+    @NotBlank
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "has_dog")
-    private Boolean hasDog;
+    @Column(name = "years_of_experience")
+    private Integer yearsOfExperience;
 
-    @Column(name = "user_blocked")
-    private Boolean userBlocked;
-
-    @Column(name = "user_role")
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
-
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+//
+//    @OneToOne(cascade = {CascadeType.DETACH,
+//            CascadeType.MERGE,
+////            CascadeType.PERSIST,
+//            CascadeType.REFRESH})
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
 //    @OneToMany(fetch = FetchType.LAZY,
-//            mappedBy = "user")
+//            mappedBy = "walker")
 //    private List<Dog> dogs;
-
-//    @OneToOne
-//    @JoinColumn(name = "walker_id")
-//    private Walker walker;
 //
 //    @OneToOne
 //    @JoinColumn(name = "order_id")

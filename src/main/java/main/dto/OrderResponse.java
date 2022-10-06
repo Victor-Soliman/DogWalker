@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import main.repository.entities.Dog;
-import main.repository.entities.User;
-import main.repository.entities.Walker;
+import main.entities.Dog;
+import main.entities.User;
+import main.entities.Walker;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.OneToOne;
 import java.sql.Date;
 
 

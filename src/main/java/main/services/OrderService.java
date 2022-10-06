@@ -7,7 +7,7 @@ import main.dto.OrderResponse;
 import main.mappers.OrderRequestMapper;
 import main.mappers.OrderResponseMapper;
 import main.repository.OrdersRepository;
-import main.repository.entities.Order;
+import main.entities.Order;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 

@@ -1,6 +1,6 @@
 package main.repository;
 
-import main.repository.entities.Walker;
+import main.entities.Walker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

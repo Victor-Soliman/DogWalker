@@ -7,7 +7,7 @@ import main.dto.WalkerResponse;
 import main.mappers.WalkerRequestMapper;
 import main.mappers.WalkerResponseMapper;
 import main.repository.WalkerRepository;
-import main.repository.entities.Walker;
+import main.entities.Walker;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 

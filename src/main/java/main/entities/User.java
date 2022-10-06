@@ -1,5 +1,4 @@
-package main.repository.entities;
-
+package main.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -18,8 +16,8 @@ import java.util.List;
 @Builder
 
 @Entity
-@Table(name = "walkers")
-public class Walker {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,43 +27,49 @@ public class Walker {
     @Column(name = "name")
     private String name;
 
+    @Min(15)
     @NotNull
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, unique = true)
+    @NotNull
     private String password;
 
     @Column(name = "city")
+    @NotNull
     private String city;
 
-    @NotBlank
-    @Column(name = "phone_number")
+    @NotNull
+    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
     @Column(name = "address")
+    @NotNull
     private String address;
 
-    @NotBlank
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
+    @NotNull
     private String email;
 
-    @Column(name = "years_of_experience")
-    private Integer yearsOfExperience;
+    @Column(name = "has_dog")
+    private Boolean hasDog;
 
-    @Column(name = "is_available")
-    private Boolean isAvailable;
-//
-//    @OneToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-////            CascadeType.PERSIST,
-//            CascadeType.REFRESH})
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @Column(name = "user_blocked")
+    private Boolean userBlocked;
+
+    @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
 
 //    @OneToMany(fetch = FetchType.LAZY,
-//            mappedBy = "walker")
+//            mappedBy = "user")
 //    private List<Dog> dogs;
+
+//    @OneToOne
+//    @JoinColumn(name = "walker_id")
+//    private Walker walker;
 //
 //    @OneToOne
 //    @JoinColumn(name = "order_id")

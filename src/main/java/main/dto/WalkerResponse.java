@@ -4,12 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import main.repository.entities.Dog;
-import main.repository.entities.User;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.Column;
-import java.util.List;
 
 @Component
 @NoArgsConstructor

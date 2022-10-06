@@ -1,7 +1,6 @@
 package main.repository;
 
-import main.repository.entities.User;
-import main.repository.entities.UserRole;
+import main.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package main.mappers;
 
 import main.dto.DogRequest;
-import main.repository.entities.Dog;
+import main.entities.Dog;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -7,7 +7,7 @@ import main.dto.DogResponse;
 import main.mappers.DogRequestMapper;
 import main.mappers.DogResponseMapper;
 import main.repository.DogsRepository;
-import main.repository.entities.Dog;
+import main.entities.Dog;
 //import main.repository.entities.Walker;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;

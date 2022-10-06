@@ -1,7 +1,7 @@
 package main.mappers;
 
 import main.dto.OrderResponse;
-import main.repository.entities.Order;
+import main.entities.Order;
 import org.springframework.stereotype.Component;
 
 @Component
