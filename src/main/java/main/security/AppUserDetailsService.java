@@ -1,4 +1,4 @@
-package main.seciurity;
+package main.security;
 
 import main.repository.UserRepository;
 import main.entities.User;
@@ -20,6 +20,6 @@ public class AppUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User userRepositoryByEmail = userRepository.findByEmail(username);
 
-        return new main.seciurity.UserDetails(userRepositoryByEmail);
+        return new main.security.UserDetails(userRepositoryByEmail);
     }
 }

@@ -1,4 +1,4 @@
-package main.exeptions;
+package main.exceptions;
 
 import lombok.Value;
 

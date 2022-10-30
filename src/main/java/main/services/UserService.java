@@ -54,16 +54,15 @@ public class UserService {
 
         List<User> searchedByName = userRepository.findByName(name);
 
-        if (searchedByName.isEmpty()) {
-
-            log.error("User(s) was not found in the database with name : " + name);
-            throw new UnsupportedOperationException(" * User(s) was not found in the database with name : " + name);
-
-        } else {
+        if (!searchedByName.isEmpty()) {
             log.info("User with name : " + name + " was found in the database");
             return searchedByName.stream()
                     .map(mapper::map)
                     .collect(Collectors.toList());
+        } else {
+            log.error("User(s) was not found in the database with name : " + name);
+            throw new UnsupportedOperationException(" * User(s) was not found in the database with name : " + name);
+
         }
     }
 

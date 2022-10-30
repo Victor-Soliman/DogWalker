@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Override
-    Optional<User> findById(Integer integer);
+    Optional<User> findById(Integer integer) throws UnsupportedOperationException;
 
-    List<User> findByName(String name);
+    List<User> findByName(String name) throws UnsupportedOperationException;
 
     User findByEmail(String email);
 
