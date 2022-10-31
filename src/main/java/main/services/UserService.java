@@ -118,7 +118,7 @@ public class UserService {
     }
 
 
-    public UserResponse updateUserPartially(UserResponse request) {
+    public UserResponse updateUserPartially(UserRequest request) {
 
         Integer id = request.getId();
 
@@ -155,11 +155,11 @@ public class UserService {
         userToBeUpdated.setAddress(userRequest.getAddress());
         userToBeUpdated.setEmail(userRequest.getEmail());
         userToBeUpdated.setHasDog(userRequest.getHasDog());
-        userToBeUpdated.setUserBlocked(userRequest.isUserBlocked());
+        userToBeUpdated.setUserBlocked(userRequest.getUserBlocked());
         userToBeUpdated.setUserRole(userRequest.getUserRole());
     }
 
-    private void setParametersPartially(UserResponse request, User userFromDataBase) {
+    private void setParametersPartially(UserRequest request, User userFromDataBase) {
         userFromDataBase.setName(request.getName() == null ? userFromDataBase.getName() : request.getName());
 
         userFromDataBase.setAge(request.getAge() == null ? userFromDataBase.getAge() : request.getAge());

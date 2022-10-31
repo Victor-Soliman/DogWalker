@@ -52,7 +52,7 @@ public class UserRequest {
     private Boolean hasDog;
 
     @Schema(description = "Checking if the input Model is blocked", example = "(865) 2408023")
-    private boolean userBlocked;
+    private Boolean userBlocked;
 
     @Schema(description = "Checking the input Model user role", example = "(865) 2408023")
     private UserRole userRole;

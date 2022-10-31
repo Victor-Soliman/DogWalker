@@ -45,7 +45,7 @@ class DogsServiceTest {
             new Dog(7, "Joe", 2, "Bigle", true, "14-541-6587"));
 
 
-    private DogRequest dogRequestRecord = new DogRequest(6, "Black", 4, "Haski",
+    private DogRequest dogRequestRecord = new DogRequest(ID, "Black", 4, "Haski",
             true, "987-854-6522");
 
     @Test
@@ -80,8 +80,7 @@ class DogsServiceTest {
 
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"leo"})
+    @Test
     void findByName() {
 
         String dogName = "leo ";
@@ -120,7 +119,7 @@ class DogsServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1})
+    @ValueSource(ints = {5})
     void delete() {
 
         Optional<Dog> dogRecord = Optional.of(DOG_RECORD);
@@ -129,10 +128,11 @@ class DogsServiceTest {
 
         Assertions.assertEquals(dogRecord, dogsRepository.findById(ID));
 
+        Mockito.verifyNoMoreInteractions(dogsRepository);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1})
+    @ValueSource(ints = {5})
     void deleteException() {
         Mockito.when(dogsRepository.findById(ID)).thenThrow(NotFoundException.class);
 
@@ -219,8 +219,8 @@ class DogsServiceTest {
     void updateDogPartiallyException() {
 
         Mockito.when(dogsRepository.findById(ID)).thenThrow(IllegalArgumentException.class);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> dogsService.update(ID, dogRequestRecord));
-
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dogsService.updateDogPartially(dogRequestRecord));
     }
 
 

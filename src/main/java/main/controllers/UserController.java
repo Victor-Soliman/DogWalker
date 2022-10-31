@@ -101,9 +101,9 @@ public class UserController {
     )
 
     @PatchMapping("/update")
-    public UserResponse patch(@RequestBody UserResponse userResponse){
+    public UserResponse patch(@RequestBody UserRequest request){
 
-        return userService.updateUserPartially(userResponse);
+        return userService.updateUserPartially(request);
     }
 
 

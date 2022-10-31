@@ -17,7 +17,7 @@ public class UserRequestMapper {
                 .address(userRequest.getAddress())
                 .email(userRequest.getEmail())
                 .hasDog(userRequest.getHasDog())
-                .userBlocked(userRequest.isUserBlocked())
+                .userBlocked(userRequest.getUserBlocked())
                 .userRole(userRequest.getUserRole())
 //                .dogs(userRequest.getDogs())
 //                .walker(userRequest.getWalker())
