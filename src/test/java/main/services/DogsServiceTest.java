@@ -36,6 +36,7 @@ class DogsServiceTest {
     private DogsService dogsService;
 
     //dummy data
+    //
     private static int ID = 5;
 
     private static final Dog DOG_RECORD = new Dog(ID, "Sun", 6, "Labrador",
