@@ -65,8 +65,10 @@ class DogsServiceTest {
         Mockito.when(dogsRepository.findById(ID)).thenReturn(Optional.of(DOG_RECORD));
 
         Optional<Dog> dogRecord = Optional.of(DOG_RECORD);
+        DogResponse expected = dogResponseMapper.map(dogRecord.get());
 
         Assertions.assertEquals(dogRecord, dogsRepository.findById(ID));
+        Assertions.assertEquals(expected,dogsService.findById(ID));
 
     }
 
@@ -80,10 +82,9 @@ class DogsServiceTest {
 
     }
 
-    @Test
-    void findByName() {
-
-        String dogName = "leo ";
+    @ParameterizedTest
+    @ValueSource(strings = "leo")
+    void findByName(String dogName) {
 
         List<Dog> dogsWithNameLeo = dogsRepository.findByName(dogName);
         dogsWithNameLeo.add(DOG_RECORD);
@@ -96,9 +97,8 @@ class DogsServiceTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Leo"})
-    void findByNameException() {
+    void findByNameException(String nonexistentDogName) {
 
-        final String nonexistentDogName = "Leo";
         Mockito.when(dogsRepository.findByName(nonexistentDogName)).thenThrow(NotFoundException.class);
 
         Assertions.assertThrows(NotFoundException.class, () -> dogsService.findByName(nonexistentDogName));
@@ -120,20 +120,20 @@ class DogsServiceTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5})
-    void delete() {
+    void delete(Integer id) {
 
         Optional<Dog> dogRecord = Optional.of(DOG_RECORD);
 
-        Mockito.when(dogsRepository.findById(ID)).thenReturn(dogRecord);
+        Mockito.when(dogsRepository.findById(id)).thenReturn(dogRecord);
 
-        Assertions.assertEquals(dogRecord, dogsRepository.findById(ID));
+        Assertions.assertEquals(dogRecord, dogsRepository.findById(id));
 
         Mockito.verifyNoMoreInteractions(dogsRepository);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {5})
-    void deleteException() {
+    void deleteException(Integer ID) {
         Mockito.when(dogsRepository.findById(ID)).thenThrow(NotFoundException.class);
 
         Assertions.assertThrows(NotFoundException.class, () -> dogsRepository.findById(ID));
