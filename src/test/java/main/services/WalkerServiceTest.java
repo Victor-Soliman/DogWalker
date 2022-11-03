@@ -131,6 +131,8 @@ class WalkerServiceTest {
         Mockito.when(walkerRepository.findById(id)).thenThrow(NotFoundException.class);
 
         Assertions.assertThrows(NotFoundException.class, () -> walkerService.delete(id));
+
+        Mockito.verifyNoMoreInteractions(walkerRepository);
     }
 
     @Test

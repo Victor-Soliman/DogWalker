@@ -97,7 +97,8 @@ public class OrderService {
 
             setAllParameters(orderRequest, orderToBeUpdated);
 
-            //we set the cost value because it is given by the application, not the user
+            //we set the cost value because it is given by the application,
+            // not the user
             setWalkCostValue(orderRequest, orderToBeUpdated);
 
             Order saved = repository.save(orderToBeUpdated);
